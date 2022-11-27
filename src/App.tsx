@@ -1,15 +1,12 @@
 import { FC } from 'react'
-import { Typography } from '@mui/material'
+import RoutesComponent from './navigation'
+import Layout from './components/Layout'
 
 const App: FC = () => (
-  <div>
-    <Typography
-      component="h1"
-      variant="h1"
-    >
-      Weather App
-    </Typography>
-  </div>
+  <Layout>
+    <RoutesComponent />
+  </Layout>
+
 )
 
 export default App
