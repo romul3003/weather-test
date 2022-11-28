@@ -43,6 +43,7 @@ const Search: FC = () => {
 
   return (
     <Autocomplete
+      sx={{ marginBottom: 4 }}
       fullWidth
       freeSolo
       disableClearable

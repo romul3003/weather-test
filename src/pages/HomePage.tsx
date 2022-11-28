@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC } from 'react'
 import { Box, Typography } from '@mui/material'
 import Search from '../components/Search'
+import CitiesList from '../components/CitiesList'
 
 const HomePage: FC = () => (
   <Box>
@@ -12,6 +14,7 @@ const HomePage: FC = () => (
       HomePage
     </Typography>
     <Search />
+    <CitiesList />
   </Box>
 )
 

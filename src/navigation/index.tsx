@@ -1,36 +1,31 @@
-// Core
 import { FC } from 'react'
 import {
   Route, Routes, Navigate,
 } from 'react-router-dom'
 
-import { book } from './book'
+import CityDetailsPage from '../pages/CityDetailsPage'
+import HomePage from '../pages/HomePage'
 
-const RoutesComponent: FC = () => {
-  const routesJSX = Object
-    .values(book)
-    .map(({ path, page: Page }) => (
-      <Route
-        key={path}
-        path={path}
-        element={<Page />}
-      />
-    ))
-
-  return (
-    <Routes>
-      { routesJSX }
-      <Route
-        path="*"
-        element={(
-          <Navigate
-            to={book.root.path}
-            replace
-          />
-        )}
-      />
-    </Routes>
-  )
-}
+const RoutesComponent: FC = () => (
+  <Routes>
+    <Route
+      path="/"
+      element={<HomePage />}
+    />
+    <Route
+      path="/details/:city"
+      element={<CityDetailsPage />}
+    />
+    <Route
+      path="*"
+      element={(
+        <Navigate
+          to="/"
+          replace
+        />
+      )}
+    />
+  </Routes>
+)
 
 export default RoutesComponent

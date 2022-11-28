@@ -1,9 +1,11 @@
-import { createSlice, createAsyncThunk, AnyAction } from '@reduxjs/toolkit'
+import {
+  createSlice, createAsyncThunk, AnyAction, PayloadAction,
+} from '@reduxjs/toolkit'
 import { formatToCelsius } from '../../helpers/formatToCelsius'
 import { api } from '../../api/index'
 import { ErrorResponse } from '../../types'
-import { CityOptionResponse, Coords } from '../types/citiesTypes'
-import { CurrentWeatherResponse, CurrentWeather } from '../types/weatherTypes'
+import { City, CityOptionResponse, Coords } from '../types/citiesTypes'
+import { CurrentWeatherResponse } from '../types/weatherTypes'
 
 export const getCityOptionsAsync = createAsyncThunk<
   CityOptionResponse[],
@@ -24,7 +26,7 @@ export const getCityOptionsAsync = createAsyncThunk<
 )
 
 export const getCurrentWeather = createAsyncThunk<
-  CurrentWeather,
+  City,
   Coords,
   {rejectValue: ErrorResponse}
 >(
@@ -57,7 +59,7 @@ export const getCurrentWeather = createAsyncThunk<
 type CitiesState = {
   options: CityOptionResponse[];
   cities: {
-    [name: string]: CurrentWeather;
+    [name: string]: City;
   };
   loading: boolean;
   error: string | null;
@@ -76,6 +78,9 @@ export const cities = createSlice({
   reducers: {
     clearOptions: (state) => {
       state.options = []
+    },
+    deleteCity: (state, action: PayloadAction<string>) => {
+      delete state.cities[action.payload]
     },
   },
   extraReducers: (builder) => {
@@ -110,7 +115,7 @@ export const cities = createSlice({
   },
 })
 
-export const { clearOptions } = cities.actions
+export const { clearOptions, deleteCity } = cities.actions
 
 export default cities.reducer
 

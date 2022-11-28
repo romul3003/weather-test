@@ -28,6 +28,9 @@ root.render(
           flexDirection: 'column',
           height: '100%',
         },
+        '#root': {
+          height: '100%',
+        },
       }}
       />
       <Provider store={store}>

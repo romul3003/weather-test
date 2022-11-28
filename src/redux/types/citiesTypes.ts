@@ -8,3 +8,17 @@ export type CityOptionResponse = Coords & {
   country: string;
   state?: string;
 }
+
+export type City = {
+  name: string;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+  weather: {
+    status: string;
+    temperature: number;
+    description: string;
+    icon: string;
+  }
+}

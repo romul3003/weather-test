@@ -47,17 +47,3 @@ export type CurrentWeatherResponse = {
   name: string;
   cod: number;
 }
-
-export type CurrentWeather = {
-  name: string;
-  coordinates: {
-    lat: number;
-    lon: number;
-  };
-  weather: {
-    status: string;
-    temperature: number;
-    description: string;
-    icon: string;
-  }
-}
