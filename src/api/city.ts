@@ -1,4 +1,6 @@
-const BASE_URL = 'http://api.openweathermap.org/geo/1.0/direct'
+import { ROOT_URL } from './config'
+
+const BASE_URL = `${ROOT_URL}/geo/1.0/direct`
 const LIMIT = 5
 
 export const city = Object.freeze({

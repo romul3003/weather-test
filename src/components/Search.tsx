@@ -6,9 +6,9 @@ import {
 } from '@mui/material'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useAppDispatch, useAppSelector } from '../redux/hooks'
-import { clearOptions, getCityOptionsAsync } from '../redux/slices/cities'
-import { selectCities } from '../redux/selectors/cities'
-import { CityOptionResponse } from '../redux/types/cities'
+import { clearOptions, getCityOptionsAsync, getCurrentWeather } from '../redux/slices/citiesSlice'
+import { selectCities } from '../redux/selectors/citiesSelectors'
+import { CityOptionResponse } from '../redux/types/citiesTypes'
 import { useDebounce } from '../hooks/useDebounce'
 
 const Search: FC = () => {
@@ -17,11 +17,6 @@ const Search: FC = () => {
   const debouncedCityName = useDebounce<string>(cityName)
   const { options, loading } = useAppSelector(selectCities)
   const autocompleteRef = useRef()
-
-  // TODO: test, should it be or not
-  useEffect(() => {
-    dispatch(clearOptions())
-  }, [dispatch])
 
   const handleTextOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const name = event.target.value.trim()
@@ -41,9 +36,9 @@ const Search: FC = () => {
     }
   }, [debouncedCityName, dispatch])
 
-  const handleOnSelectChange = (value: CityOptionResponse) => {
-    // eslint-disable-next-line no-console
-    console.log('value', JSON.stringify(value, null, 2))
+  const handleOnSelectChange = ({ lat, lon }: CityOptionResponse) => {
+    dispatch(getCurrentWeather({ lat, lon }))
+    setCityName('')
   }
 
   return (
@@ -73,7 +68,7 @@ const Search: FC = () => {
             ...params.InputProps,
             endAdornment: (
               <>
-                {loading && (
+                { cityName && loading && (
                   <CircularProgress
                     color="inherit"
                     size={20}
