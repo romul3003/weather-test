@@ -116,25 +116,8 @@ const CityCard: FC<CityCardProps> = ({ city }) => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            {/* <List dense>
-              <ListItem disablePadding>
-                <ListItemText primary={`Feels like: ${main.feels_like}°C`} />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText primary={`Temp min: ${main.temp_min}°C`} />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText primary={`Temp max: ${main.temp_max}°C`} />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText primary={`Pressure: ${main.pressure} hPa`} />
-              </ListItem>
-              <ListItem disablePadding>
-                <ListItemText primary={`Humidity: ${main.humidity}%`} />
-              </ListItem>
-            </List> */}
             <DetailsList
-              cityMain={main}
+              cityMainIndicators={main}
               isDense
             />
           </AccordionDetails>

@@ -1,45 +1,28 @@
-import { List, ListItem, ListItemText } from '@mui/material'
 import { FC } from 'react'
+import { List, ListItem, ListItemText } from '@mui/material'
+import { useCreateData } from '../hooks/useCreateData'
 import { City } from '../redux/types/citiesTypes'
 
 type DetailsListProps = {
-  cityMain: City['main'];
+  cityMainIndicators: City['main'];
   isDense?: boolean;
 }
 
-const DetailsList: FC<DetailsListProps> = ({ cityMain, isDense }) => (
-  <List dense={isDense}>
-    <ListItem
-      disablePadding
-      sx={{ textAlign: 'center' }}
-    >
-      <ListItemText primary={`Feels like: ${cityMain.feels_like}°C`} />
-    </ListItem>
-    <ListItem
-      disablePadding
-      sx={{ textAlign: 'center' }}
-    >
-      <ListItemText primary={`Temp min: ${cityMain.temp_min}°C`} />
-    </ListItem>
-    <ListItem
-      disablePadding
-      sx={{ textAlign: 'center' }}
-    >
-      <ListItemText primary={`Temp max: ${cityMain.temp_max}°C`} />
-    </ListItem>
-    <ListItem
-      disablePadding
-      sx={{ textAlign: 'center' }}
-    >
-      <ListItemText primary={`Pressure: ${cityMain.pressure} hPa`} />
-    </ListItem>
-    <ListItem
-      disablePadding
-      sx={{ textAlign: 'center' }}
-    >
-      <ListItemText primary={`Humidity: ${cityMain.humidity}%`} />
-    </ListItem>
-  </List>
-)
+const DetailsList: FC<DetailsListProps> = ({ cityMainIndicators, isDense }) => {
+  const rows = useCreateData(cityMainIndicators)
+
+  return (
+    <List dense={isDense}>
+      {rows.map(row => (
+        <ListItem
+          disablePadding
+          sx={{ textAlign: 'center' }}
+        >
+          <ListItemText primary={`${row.name} ${row.value} ${row.measurementUnit}`} />
+        </ListItem>
+      ))}
+    </List>
+  )
+}
 
 export default DetailsList
