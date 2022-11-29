@@ -1,3 +1,5 @@
+import { CurrentWeatherResponse } from './weatherTypes'
+
 export type Coords = {
   lat: number;
   lon: number;
@@ -11,14 +13,7 @@ export type CityOptionResponse = Coords & {
 
 export type City = {
   name: string;
-  coordinates: {
-    lat: number;
-    lon: number;
-  };
-  weather: {
-    status: string;
-    temperature: number;
-    description: string;
-    icon: string;
-  }
+  coordinates: Coords;
+  main: CurrentWeatherResponse['main'];
+  weather: CurrentWeatherResponse['weather'][0]
 }

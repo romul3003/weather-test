@@ -1,7 +1,6 @@
 import {
   createSlice, createAsyncThunk, AnyAction, PayloadAction,
 } from '@reduxjs/toolkit'
-import { formatToCelsius } from '../../helpers/formatToCelsius'
 import { api } from '../../api/index'
 import { ErrorResponse } from '../../types'
 import { City, CityOptionResponse, Coords } from '../types/citiesTypes'
@@ -43,15 +42,15 @@ export const getCurrentWeather = createAsyncThunk<
       name, main, weather, coord: coordinates,
     }: CurrentWeatherResponse = await response.json()
 
-    const { main: status, description, icon } = weather[0]
-    const temperature = formatToCelsius(main.temp)
+    const roundedMain = Object.fromEntries(
+      Object.entries(main).map(([key, value]) => [key, Math.round(value)]),
+    )
 
     return {
       name,
       coordinates,
-      weather: {
-        status, temperature, description, icon,
-      },
+      main: roundedMain as typeof main,
+      weather: weather[0],
     }
   },
 )
