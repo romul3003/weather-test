@@ -17,7 +17,11 @@ const CitiesList: FC = () => {
   const { cities } = useAppSelector(selectCities)
   const list = Object.values(cities)
 
-  return list.length ? (
+  if (!list.length) {
+    return null
+  }
+
+  return (
     <Box sx={{ width: '100%', marginBottom: 4 }}>
       <Grid
         container
@@ -43,7 +47,7 @@ const CitiesList: FC = () => {
         })}
       </Grid>
     </Box>
-  ) : null
+  )
 }
 
 export default CitiesList

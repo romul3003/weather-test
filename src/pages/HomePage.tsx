@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FC } from 'react'
 import { Box } from '@mui/material'
 import Search from '../components/Search'

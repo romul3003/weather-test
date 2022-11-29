@@ -18,16 +18,16 @@ const Chart: FC = () => {
   const { loading, forecastList } = useAppSelector(selectForecast)
 
   const averageTemperature = useMemo(() => {
-    if (forecastList.length) {
-      return Math.round(
-        forecastList.reduce(
-          ((acc, item) => acc + item.main.temp),
-          0,
-        ) / forecastList.length,
-      )
+    if (!forecastList.length) {
+      return 0
     }
 
-    return 0
+    return Math.round(
+      forecastList.reduce(
+        ((acc, item) => acc + item.main.temp),
+        0,
+      ) / forecastList.length,
+    )
   }, [forecastList])
 
   if (loading) {
@@ -38,7 +38,11 @@ const Chart: FC = () => {
     )
   }
 
-  return forecastList.length ? (
+  if (!forecastList.length) {
+    return null
+  }
+
+  return (
     <Stack
       direction="row"
       justifyContent="center"
@@ -78,7 +82,7 @@ const Chart: FC = () => {
         )
       })}
     </Stack>
-  ) : null
+  )
 }
 
 export default Chart
