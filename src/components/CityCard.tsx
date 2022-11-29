@@ -14,15 +14,13 @@ import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
-  List,
-  ListItem,
-  ListItemText,
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 import { useAppDispatch } from '../redux/hooks'
 import { City, Coords } from '../redux/types/citiesTypes'
 import { deleteCity, getCurrentWeather } from '../redux/slices/citiesSlice'
+import DetailsList from './DetailsList'
 
 type CityCardProps = {
   city: City;
@@ -118,7 +116,7 @@ const CityCard: FC<CityCardProps> = ({ city }) => {
             </Typography>
           </AccordionSummary>
           <AccordionDetails>
-            <List dense>
+            {/* <List dense>
               <ListItem disablePadding>
                 <ListItemText primary={`Feels like: ${main.feels_like}°C`} />
               </ListItem>
@@ -134,7 +132,11 @@ const CityCard: FC<CityCardProps> = ({ city }) => {
               <ListItem disablePadding>
                 <ListItemText primary={`Humidity: ${main.humidity}%`} />
               </ListItem>
-            </List>
+            </List> */}
+            <DetailsList
+              cityMain={main}
+              isDense
+            />
           </AccordionDetails>
         </Accordion>
       </CardContent>

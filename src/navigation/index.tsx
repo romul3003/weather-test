@@ -13,7 +13,7 @@ const RoutesComponent: FC = () => (
       element={<HomePage />}
     />
     <Route
-      path="/details/:city"
+      path="/details/:cityName"
       element={<CityDetailsPage />}
     />
     <Route
