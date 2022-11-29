@@ -12,18 +12,18 @@ import {
 import storage from 'redux-persist/lib/storage'
 
 import citiesReducer from './slices/citiesSlice'
-import weatherReducer from './slices/weatherSlice'
+import forecastReducer from './slices/forecastSlice'
 
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blackList: ['cities.options', 'cities.loading', 'cities.error'],
+  blackList: ['cities.options', 'cities.loading', 'cities.error', 'forecast'],
 }
 
 const rootReducer = combineReducers({
   cities: citiesReducer,
-  weather: weatherReducer,
+  forecast: forecastReducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

@@ -1,17 +1,26 @@
-import { FC } from 'react'
+import { FC, useEffect } from 'react'
 import {
   Box, Typography, CardMedia, Stack,
 } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useAppSelector } from '../redux/hooks'
+import { useAppDispatch, useAppSelector } from '../redux/hooks'
 import { selectCity } from '../redux/selectors/citiesSelectors'
 
 import BackToMainLink from '../components/BackToMainLink'
 import DetailedTable from '../components/DetailedTable'
+import { getForecastAsync } from '../redux/slices/forecastSlice'
+import Chart from '../components/Chart'
 
 const CityDetailsPage: FC = () => {
+  const dispatch = useAppDispatch()
   const { cityName } = useParams()
   const city = useAppSelector(selectCity(cityName))
+
+  useEffect(() => {
+    if (city) {
+      dispatch(getForecastAsync(city.coordinates))
+    }
+  }, [city, dispatch])
 
   if (!city) {
     return (
@@ -84,6 +93,7 @@ const CityDetailsPage: FC = () => {
         />
       </Stack>
       <DetailedTable cityMainIndicators={main} />
+      <Chart />
     </Box>
   )
 }

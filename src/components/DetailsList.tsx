@@ -15,6 +15,7 @@ const DetailsList: FC<DetailsListProps> = ({ cityMainIndicators, isDense }) => {
     <List dense={isDense}>
       {rows.map(row => (
         <ListItem
+          key={row.name}
           disablePadding
           sx={{ textAlign: 'center' }}
         >

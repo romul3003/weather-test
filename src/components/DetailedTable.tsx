@@ -40,7 +40,10 @@ const DetailedTable: FC<{
     const rows = useCreateData(cityMainIndicators)
 
     return (
-      <TableContainer component={Paper}>
+      <TableContainer
+        component={Paper}
+        sx={{ mb: 4 }}
+      >
         <Table
           aria-label="customized table"
         >

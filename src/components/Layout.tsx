@@ -6,7 +6,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => (
   <>
     <Header />
     <main>
-      <Container sx={{ marginTop: '4rem' }}>
+      <Container sx={{ margin: '4rem auto' }}>
         {children}
       </Container>
     </main>
