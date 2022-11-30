@@ -18,7 +18,6 @@ const persistConfig = {
   key: 'root',
   version: 1,
   storage,
-  blackList: ['cities.options', 'cities.loading', 'cities.error', 'forecast'],
 }
 
 const rootReducer = combineReducers({
